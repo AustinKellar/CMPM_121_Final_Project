@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class ControllerSignIn : MonoBehaviour
 {
+    [SerializeField]
+    private float _timeToHoldB;
+
     private PlayerIndex _index;
     private PlayerSpawner _playerSpawner;
+    private float _pressBTime;
 
     public bool HasJoined { get; private set; }
 
@@ -24,6 +28,10 @@ public class ControllerSignIn : MonoBehaviour
             _playerSpawner.Spawn(_index);
         }
         if (state.Pressed(CButton.B))
+        {
+            _pressBTime = Time.time;
+        }
+        if (state.B && Time.time > _timeToHoldB + _pressBTime)
         {
             _playerSpawner.Despawn(_index);
         }

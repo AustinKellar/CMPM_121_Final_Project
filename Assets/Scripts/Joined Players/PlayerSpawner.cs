@@ -11,6 +11,9 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField]
     private ParticleSystem _despawnParticleEffect;
 
+    [SerializeField]
+    List<Vector3> _spawnLocations;
+
     private PlayerColorController _colorController;
 
     private PlayerInput[] _players
@@ -21,6 +24,11 @@ public class PlayerSpawner : MonoBehaviour
     private void Awake()
     {
         _colorController = GetComponent<PlayerColorController>();
+        
+        if (_spawnLocations.Count < _players.Length)
+        {
+            throw new System.Exception("There are not enough player spawn locations specified.");
+        }
     }
 
     public void Spawn(PlayerIndex index)
@@ -30,18 +38,19 @@ public class PlayerSpawner : MonoBehaviour
             GameObject player = Instantiate(_playerPrefab);
             player.GetComponent<PlayerInput>().Index = index;
             player.transform.parent = gameObject.transform;
+            player.transform.position = _spawnLocations[(int)index-1];
             player.GetComponent<Renderer>().material = _colorController.AssignStartingColor(index);
         }
     }
 
     public void Despawn(PlayerIndex index)
     {
-        GameObject player = _players.FirstOrDefault(p => p.Index == index).gameObject;
+        PlayerInput player = _players.FirstOrDefault(p => p.Index == index);
 
         if (player)
         {
             Transform playerTransform = player.transform;
-            Destroy(player);
+            Destroy(player.gameObject);
 
             ParticleSystem particleEmitter = Instantiate(_despawnParticleEffect);
             particleEmitter.transform.parent = gameObject.transform;
