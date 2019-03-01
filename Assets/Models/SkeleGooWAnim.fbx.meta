@@ -1,0 +1,176 @@
+fileFormatVersion: 2
+guid: e7ccef54baee20f4184babfb6979cc6e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Goo
+    100002: Goo.Head
+    100004: Goo.LowerSpine
+    100006: Goo.Neck
+    100008: Goo.UpperSpine
+    100010: L.Foot
+    100012: L.Foot_end
+    100014: L.Forearm
+    100016: L.Hand
+    100018: L.Hand_end
+    100020: L.Shin
+    100022: L.Thigh
+    100024: L.UpperArm
+    100026: R.Foot
+    100028: R.Foot_end
+    100030: R.Forearm
+    100032: R.Hand
+    100034: R.Hand_end
+    100036: R.Shin
+    100038: R.Thigh
+    100040: R.UpperArm
+    100042: RetopologyGooBody
+    100044: RetopologySkele
+    100046: Skele
+    100048: Skele.Head
+    100050: Skele.Head_end
+    100052: Skele.LowerSpine
+    100054: Skele.Neck
+    100056: Skele.UpperSpine
+    100058: //RootNode
+    100060: Tail
+    100062: TailTip
+    100064: TailTip_end
+    400000: Goo
+    400002: Goo.Head
+    400004: Goo.LowerSpine
+    400006: Goo.Neck
+    400008: Goo.UpperSpine
+    400010: L.Foot
+    400012: L.Foot_end
+    400014: L.Forearm
+    400016: L.Hand
+    400018: L.Hand_end
+    400020: L.Shin
+    400022: L.Thigh
+    400024: L.UpperArm
+    400026: R.Foot
+    400028: R.Foot_end
+    400030: R.Forearm
+    400032: R.Hand
+    400034: R.Hand_end
+    400036: R.Shin
+    400038: R.Thigh
+    400040: R.UpperArm
+    400042: RetopologyGooBody
+    400044: RetopologySkele
+    400046: Skele
+    400048: Skele.Head
+    400050: Skele.Head_end
+    400052: Skele.LowerSpine
+    400054: Skele.Neck
+    400056: Skele.UpperSpine
+    400058: //RootNode
+    400060: Tail
+    400062: TailTip
+    400064: TailTip_end
+    2100000: Goo2
+    2100002: Skeleton
+    2100004: EyeSocket
+    4300000: RetopologyGooBody
+    4300002: RetopologySkele
+    7400000: Goo|RetopologyGooBodyAction
+    7400002: Goo|RetopologySkeleAction
+    7400004: Goo|SkeleGoo_Charge_Side
+    7400006: Goo|SkeleGoo_Idle
+    7400008: Goo|SkeleGoo_Jump
+    7400010: Goo|SkeleGoo_Run
+    7400012: Goo|SkeleGoo_Run.001
+    7400014: Skele|RetopologyGooBodyAction
+    7400016: Skele|RetopologySkeleAction
+    7400018: Skele|SkeleGoo_Run
+    9500000: //RootNode
+    13700000: RetopologyGooBody
+    13700002: RetopologySkele
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

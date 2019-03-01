@@ -39,7 +39,7 @@ public class PlayerSpawner : MonoBehaviour
             player.GetComponent<PlayerInput>().Index = index;
             player.transform.parent = gameObject.transform;
             player.transform.position = _spawnLocations[(int)index-1];
-            player.GetComponent<Renderer>().material = _colorController.AssignStartingColor(index);
+            player.GetComponentInChildren<SkinnedMeshRenderer>().material = _colorController.AssignStartingColor(index);
         }
     }
 

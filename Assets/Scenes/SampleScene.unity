@@ -325,15 +325,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd98d6a1b8aa4ed4185f5fe30a5394bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 7946555627040371689, guid: 93d267d4b03d50844811a260b772b475,
+  _playerPrefab: {fileID: 6078881875637824174, guid: 93d267d4b03d50844811a260b772b475,
     type: 3}
   _despawnParticleEffect: {fileID: 9126510731915059647, guid: 25df837706f561b45a5e412686acbbf0,
     type: 3}
   _spawnLocations:
-  - {x: -4.5, y: 8, z: -4.5}
-  - {x: 4.5, y: 8, z: -4.5}
-  - {x: -2, y: 8, z: -4.5}
-  - {x: 2, y: 8, z: -4.5}
+  - {x: -4.5, y: 8, z: -2}
+  - {x: 4.5, y: 8, z: -2}
+  - {x: -2, y: 8, z: -2}
+  - {x: 2, y: 8, z: -2}
 --- !u!114 &265762622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -933,10 +933,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availableMaterials:
-  - {fileID: 2100000, guid: 119ce64c459943c419e1c747be5d569d, type: 2}
-  - {fileID: 2100000, guid: 31de7fde1a583a546b71b25c7366ac26, type: 2}
-  - {fileID: 2100000, guid: 8dc5f3ced200be342b974bb4fd4ab03b, type: 2}
-  - {fileID: 2100000, guid: f1ee6871556cbbe429eebc223d9dac7c, type: 2}
+  - {fileID: 2100000, guid: d42272ab1f280f2429f866943fed56b1, type: 2}
+  - {fileID: 2100000, guid: 998af1d6657a64147b0360f29a97bc5f, type: 2}
+  - {fileID: 2100000, guid: 67802e91789250f4da3f71995c6e84e1, type: 2}
+  - {fileID: 2100000, guid: b1ba6fe425d78f548bd7055df40edc89, type: 2}
 --- !u!4 &1494025117
 Transform:
   m_ObjectHideFlags: 0
