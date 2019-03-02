@@ -19,8 +19,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private PlayerColorController _colorController;
     private GameObject _startBlock = null;
-    private int _signedInPlayers = 0;
-    private PlayerIndex _index;
+    private List<PlayerIndex> _playersToRespawn = new List<PlayerIndex>();
 
     private List<PlayerInput> _players = new List<PlayerInput>();
 
@@ -43,10 +42,9 @@ public class PlayerSpawner : MonoBehaviour
             player.transform.parent = gameObject.transform;
             player.transform.position = _spawnLocations[(int)index-1];
             player.GetComponentInChildren<SkinnedMeshRenderer>().material = _colorController.AssignStartingColor(index);
-            _signedInPlayers++;
             _players.Add(player.GetComponent<PlayerInput>());
 
-            if (_signedInPlayers >= 2)
+            if (_players.Count >= 2)
             {
                 Invoke("SpawnStartBlock", 0.5f);
             }
@@ -67,10 +65,9 @@ public class PlayerSpawner : MonoBehaviour
             particleEmitter.transform.position = playerTransform.position;
             particleEmitter.GetComponent<Renderer>().material = _colorController.GetColor(index);
             _colorController.FreeColorAtIndex(index);
-            _signedInPlayers--;
             _players.RemoveAll(p => p.Index == index);
 
-            if (_signedInPlayers <= 1)
+            if (_players.Count <= 1)
             {
                 Invoke("DespawnStartBlock", 0.5f);
             }
@@ -81,27 +78,17 @@ public class PlayerSpawner : MonoBehaviour
     {
         Despawn(index);
 
-        _index = index;
-        Invoke("SpawnAfterSquish", 1f);
+        _playersToRespawn.Add(index);
+        Invoke("SpawnSquishedPlayers", 1f);
     }
 
-    private void SpawnAfterSquish()
+    private void SpawnSquishedPlayers()
     {
-        if (!_players.FirstOrDefault(p => p.Index == _index))
+        foreach (PlayerIndex index in _playersToRespawn)
         {
-            GameObject player = Instantiate(_playerPrefab);
-            player.GetComponent<PlayerInput>().Index = _index;
-            player.transform.parent = gameObject.transform;
-            player.transform.position = _spawnLocations[(int)_index - 1];
-            player.GetComponentInChildren<SkinnedMeshRenderer>().material = _colorController.AssignStartingColor(_index);
-            _signedInPlayers++;
-            _players.Add(player.GetComponent<PlayerInput>());
-
-            if (_signedInPlayers >= 2)
-            {
-                Invoke("SpawnStartBlock", 0.5f);
-            }
+            Spawn(index);
         }
+        _playersToRespawn.Clear();
     }
 
     private void SpawnStartBlock()
