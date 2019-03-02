@@ -327,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 6078881875637824174, guid: 93d267d4b03d50844811a260b772b475,
     type: 3}
+  _blockPrefab: {fileID: 483579204, guid: 1a94d58ac9f0b074d9f6a7eb033a684e, type: 3}
   _despawnParticleEffect: {fileID: 9126510731915059647, guid: 25df837706f561b45a5e412686acbbf0,
     type: 3}
   _spawnLocations:

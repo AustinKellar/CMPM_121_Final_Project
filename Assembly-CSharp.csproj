@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\Joined Players\PlayerJump.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerSpawner.cs" />
+    <Compile Include="Assets\Scripts\Joined Players\SquishDetector.cs" />
     <Compile Include="Assets\Scripts\Joined Players\TemporaryRotator.cs" />
     <Compile Include="Assets\Scripts\Static\Materials.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
