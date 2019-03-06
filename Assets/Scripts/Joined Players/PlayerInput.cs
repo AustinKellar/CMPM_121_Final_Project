@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
     {
         GamePadState state = GamePad.GetState(Index);
         HorizontalMovement = state.GetAxis(CAxis.LX);
-        Jump = state.Pressed(CButton.A);
-        Dash = state.Pressed(CButton.X);
+        Jump = state.Pressed(CButton.A) || (Index == PlayerIndex.One && Input.GetKeyDown(KeyCode.Space) || (Index == PlayerIndex.Two && Input.GetKeyDown(KeyCode.UpArrow)));
+        Dash = state.Pressed(CButton.X) || (Index == PlayerIndex.One && Input.GetKeyDown(KeyCode.LeftShift) || (Index == PlayerIndex.Two && Input.GetKeyDown(KeyCode.RightShift)));
     }
 }

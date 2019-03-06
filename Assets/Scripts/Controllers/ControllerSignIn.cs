@@ -35,6 +35,45 @@ public class ControllerSignIn : MonoBehaviour
         {
             _playerSpawner.Despawn(_index);
         }
+
+        CaptureKeyboardInput();
+    }
+
+    private void CaptureKeyboardInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _playerSpawner.Spawn(PlayerIndex.One);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _playerSpawner.Spawn(PlayerIndex.Two);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _playerSpawner.Spawn(PlayerIndex.Three);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _playerSpawner.Spawn(PlayerIndex.Four);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            _playerSpawner.Despawn(PlayerIndex.One);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            _playerSpawner.Despawn(PlayerIndex.Two);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            _playerSpawner.Despawn(PlayerIndex.Three);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            _playerSpawner.Despawn(PlayerIndex.Four);
+        }
     }
 
     public void InitializeController(int index)
