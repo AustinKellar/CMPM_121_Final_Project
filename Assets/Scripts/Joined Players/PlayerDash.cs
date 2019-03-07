@@ -35,6 +35,7 @@ public class PlayerDash : MonoBehaviour
             IsDashing = true;
             _previousDashTime = Time.time;
             _animation.SetTrigger("Dashing");
+            AudioManager.Instance.PlayOneShot("Character Dash");
 
             if (_input.HorizontalMovement > 0)
             {

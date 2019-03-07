@@ -25,6 +25,11 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Awake()
     {
+        if (!AudioManager.Instance.IsPlaying("Menu Theme"))
+        {
+            AudioManager.Instance.FadeInSound("Menu Theme", 1f);
+        }
+
         _colorController = GetComponent<PlayerColorController>();
         
         if (_spawnLocations.Count < _players.Count)
@@ -43,6 +48,7 @@ public class PlayerSpawner : MonoBehaviour
             player.transform.position = _spawnLocations[(int)index-1];
             player.GetComponentInChildren<SkinnedMeshRenderer>().material = _colorController.AssignStartingColor(index);
             _players.Add(player.GetComponent<PlayerInput>());
+            AudioManager.Instance.PlayOneShot("Character Spawn");
 
             if (_players.Count >= 2)
             {
@@ -65,7 +71,13 @@ public class PlayerSpawner : MonoBehaviour
             particleEmitter.transform.position = playerTransform.position;
             particleEmitter.GetComponent<Renderer>().material = _colorController.GetColor(index);
             _colorController.FreeColorAtIndex(index);
-            _players.RemoveAll(p => p.Index == index);
+            int removedPlayers = _players.RemoveAll(p => p.Index == index);
+
+            if (removedPlayers > 0)
+            {
+                Debug.Log(removedPlayers);
+                AudioManager.Instance.PlayOneShot("Character Death");
+            }
 
             if (_players.Count <= 1)
             {
@@ -102,6 +114,7 @@ public class PlayerSpawner : MonoBehaviour
         _startBlock.transform.parent = gameObject.transform;
         _startBlock.transform.position = new Vector3(0, 20, -2);
         _startBlock.GetComponent<Rigidbody>().velocity = new Vector3(0, -80, 0);
+        AudioManager.Instance.PlayOneShot("Block Spawn Rock");
     }
 
     private void DespawnStartBlock()
@@ -120,5 +133,6 @@ public class PlayerSpawner : MonoBehaviour
         particleEmitter.transform.position = startBlockTransform.position;
         particleEmitter.GetComponent<Renderer>().material = particleMaterial;
         _startBlock = null;
+        AudioManager.Instance.PlayOneShot("Block Break Rock");
     }
 }
