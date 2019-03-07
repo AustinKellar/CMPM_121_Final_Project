@@ -419,8 +419,9 @@ GameObject:
   - component: {fileID: 265762620}
   - component: {fileID: 265762621}
   - component: {fileID: 265762622}
+  - component: {fileID: 265762623}
   m_Layer: 0
-  m_Name: Player Spawner
+  m_Name: Object Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -454,14 +455,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 6078881875637824174, guid: 93d267d4b03d50844811a260b772b475,
     type: 3}
-  _blockPrefab: {fileID: 483579204, guid: 1a94d58ac9f0b074d9f6a7eb033a684e, type: 3}
   _despawnParticleEffect: {fileID: 9126510731915059647, guid: 25df837706f561b45a5e412686acbbf0,
     type: 3}
   _spawnLocations:
-  - {x: -4.5, y: 8, z: -2}
-  - {x: 4.5, y: 8, z: -2}
-  - {x: -2, y: 8, z: -2}
-  - {x: 2, y: 8, z: -2}
+  - {x: -5, y: 8, z: -2}
+  - {x: 5, y: 8, z: -2}
+  - {x: -1.5, y: 8, z: -2}
+  - {x: 1.5, y: 8, z: -2}
 --- !u!114 &265762622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +474,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b81c58275149ab4f98411cc6f491e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultMaterial: {fileID: 2100000, guid: 712afd7c2b67e024aad4d886b37bc91a, type: 2}
+--- !u!114 &265762623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265762619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43bd82b2615fd38448569b5e73818654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blockPrefab: {fileID: 483579204, guid: 1a94d58ac9f0b074d9f6a7eb033a684e, type: 3}
+  _paintBlockPrefab: {fileID: 483579204, guid: 53d547674cd0ab14480543a8bb24f4d1, type: 3}
+  _despawnParticleEffect: {fileID: 9126510731915059647, guid: 25df837706f561b45a5e412686acbbf0,
+    type: 3}
+  _paintBlockSpawnLocations:
+  - {x: -5, y: 12, z: -2}
+  - {x: 5, y: 12, z: -2}
+  - {x: -1.5, y: 12, z: -2}
+  - {x: 1.5, y: 12, z: -2}
 --- !u!1 &408683077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,6 +1772,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 998af1d6657a64147b0360f29a97bc5f, type: 2}
   - {fileID: 2100000, guid: 67802e91789250f4da3f71995c6e84e1, type: 2}
   - {fileID: 2100000, guid: b1ba6fe425d78f548bd7055df40edc89, type: 2}
+  - {fileID: 2100000, guid: cd98c404cec458d479696c64ff534b9e, type: 2}
+  - {fileID: 2100000, guid: ce5099455602c3647979922318b06160, type: 2}
+  - {fileID: 2100000, guid: 71b569e04dfa4b74db6e4849c65a0d4f, type: 2}
+  - {fileID: 2100000, guid: a61dbf53e846a3d4793ffffdd5f12891, type: 2}
 --- !u!4 &1494025117
 Transform:
   m_ObjectHideFlags: 0

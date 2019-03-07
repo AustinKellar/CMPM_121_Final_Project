@@ -9,15 +9,13 @@ public class PlayerSpawner : MonoBehaviour
     private GameObject _playerPrefab;
 
     [SerializeField]
-    private GameObject _blockPrefab;
-
-    [SerializeField]
     private ParticleSystem _despawnParticleEffect;
 
     [SerializeField]
     List<Vector3> _spawnLocations;
 
     private PlayerColorController _colorController;
+    private BlockSpawner _blockSpawner;
     private GameObject _startBlock = null;
     private List<PlayerIndex> _playersToRespawn = new List<PlayerIndex>();
 
@@ -25,16 +23,20 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Awake()
     {
-        if (!AudioManager.Instance.IsPlaying("Menu Theme"))
-        {
-            AudioManager.Instance.FadeInSound("Menu Theme", 1f);
-        }
-
         _colorController = GetComponent<PlayerColorController>();
+        _blockSpawner = GetComponent<BlockSpawner>();
         
         if (_spawnLocations.Count < _players.Count)
         {
             throw new System.Exception("There are not enough player spawn locations specified.");
+        }
+    }
+
+    private void Start()
+    {
+        if (!AudioManager.Instance.IsPlaying("Menu Theme"))
+        {
+            AudioManager.Instance.FadeInSound("Menu Theme", 1f);
         }
     }
 
@@ -46,7 +48,7 @@ public class PlayerSpawner : MonoBehaviour
             player.GetComponent<PlayerInput>().Index = index;
             player.transform.parent = gameObject.transform;
             player.transform.position = _spawnLocations[(int)index-1];
-            player.GetComponentInChildren<SkinnedMeshRenderer>().material = _colorController.AssignStartingColor(index);
+            player.GetComponentInChildren<SkinnedMeshRenderer>().material = _colorController.AssignDefaultMaterial(index);
             _players.Add(player.GetComponent<PlayerInput>());
             AudioManager.Instance.PlayOneShot("Character Spawn");
 
@@ -69,13 +71,11 @@ public class PlayerSpawner : MonoBehaviour
             ParticleSystem particleEmitter = Instantiate(_despawnParticleEffect);
             particleEmitter.transform.parent = gameObject.transform;
             particleEmitter.transform.position = playerTransform.position;
-            particleEmitter.GetComponent<Renderer>().material = _colorController.GetColor(index);
-            _colorController.FreeColorAtIndex(index);
+            particleEmitter.GetComponent<Renderer>().material = player.GetComponentInChildren<SkinnedMeshRenderer>().material;
             int removedPlayers = _players.RemoveAll(p => p.Index == index);
 
             if (removedPlayers > 0)
             {
-                Debug.Log(removedPlayers);
                 AudioManager.Instance.PlayOneShot("Character Death");
             }
 
@@ -94,6 +94,16 @@ public class PlayerSpawner : MonoBehaviour
         Invoke("SpawnSquishedPlayers", 1f);
     }
 
+    private void SpawnStartBlock()
+    {
+        _blockSpawner.SpawnStartBlock();
+    }
+
+    private void DespawnStartBlock()
+    {
+        _blockSpawner.DespawnStartBlock();
+    }
+
     private void SpawnSquishedPlayers()
     {
         foreach (PlayerIndex index in _playersToRespawn)
@@ -101,38 +111,5 @@ public class PlayerSpawner : MonoBehaviour
             Spawn(index);
         }
         _playersToRespawn.Clear();
-    }
-
-    private void SpawnStartBlock()
-    { 
-        if (_startBlock != null)
-        {
-            return;
-        }
-
-        _startBlock = Instantiate(_blockPrefab);
-        _startBlock.transform.parent = gameObject.transform;
-        _startBlock.transform.position = new Vector3(0, 20, -2);
-        _startBlock.GetComponent<Rigidbody>().velocity = new Vector3(0, -80, 0);
-        AudioManager.Instance.PlayOneShot("Block Spawn Rock");
-    }
-
-    private void DespawnStartBlock()
-    {
-        if (_startBlock == null)
-        {
-            return;
-        }
-
-        Transform startBlockTransform = _startBlock.transform;
-        Material particleMaterial = _startBlock.GetComponent<Renderer>().material;
-        Destroy(_startBlock);
-
-        ParticleSystem particleEmitter = Instantiate(_despawnParticleEffect);
-        particleEmitter.transform.parent = gameObject.transform;
-        particleEmitter.transform.position = startBlockTransform.position;
-        particleEmitter.GetComponent<Renderer>().material = particleMaterial;
-        _startBlock = null;
-        AudioManager.Instance.PlayOneShot("Block Break Rock");
     }
 }

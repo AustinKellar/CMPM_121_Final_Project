@@ -21,7 +21,10 @@ public class SquishDetector : MonoBehaviour
     {
         if (other.tag == "Block")
         {
-            _playerSpawner.Respawn(_index);
+            if (other.GetComponent<Rigidbody>().velocity.y < -0.1f)
+            {
+                _playerSpawner.Respawn(_index);
+            }
         }
     }
 }

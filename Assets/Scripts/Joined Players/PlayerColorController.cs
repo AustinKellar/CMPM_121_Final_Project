@@ -6,41 +6,38 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerColorController))]
 public class PlayerColorController : MonoBehaviour
 {
-    private Dictionary<PlayerIndex, Material> _defaultMaterials;
+    [SerializeField]
+    private Material _defaultMaterial;
+
     private Dictionary<PlayerIndex, Material> _playerMaterials;
+
+    public Material DefaultMaterial { get { return _defaultMaterial; } }
 
     private void Start()
     {
-        _defaultMaterials = new Dictionary<PlayerIndex, Material>();
         _playerMaterials = new Dictionary<PlayerIndex, Material>();
 
         for (int i = 1; i <= 4; i++)
         {
             _playerMaterials.Add((PlayerIndex)i, null);
-            _defaultMaterials.Add((PlayerIndex)i, Materials.Instance.availableMaterials[i-1]);
         }
     }
 
-    public Material AssignStartingColor(PlayerIndex index)
+    public Material AssignDefaultMaterial(PlayerIndex index)
     {
-        Material defaultMaterial = _defaultMaterials[index];
-        if (_playerMaterials.Where(m => m.Value == defaultMaterial).ToList().Count == 0)
+        if (_playerMaterials[index] != null)
         {
-            _playerMaterials[index] = defaultMaterial;
-            return defaultMaterial;
+            return _playerMaterials[index];
         }
-        else
-        {
-            Material material = Materials.Instance.availableMaterials.First(m => !_playerMaterials.ContainsValue(m));
-            _playerMaterials[index] = material;
 
-            return material;
-        }
+        return _defaultMaterial;
     }
 
-    public Material GetColor(PlayerIndex index)
+    public void SetColor(GameObject player, Material material)
     {
-        return _playerMaterials[index];
+        PlayerInput input = player.GetComponent<PlayerInput>();
+        player.GetComponentInChildren<SkinnedMeshRenderer>().material = material;
+        _playerMaterials[input.Index] = material;
     }
 
     public void FreeColorAtIndex(PlayerIndex index)

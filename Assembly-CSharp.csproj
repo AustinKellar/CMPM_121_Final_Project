@@ -80,6 +80,7 @@
     <Compile Include="Assets\CarbonInput\Scripts\TouchInput\TouchButton.cs" />
     <Compile Include="Assets\CarbonInput\Scripts\TouchInput\TouchMapping.cs" />
     <Compile Include="Assets\CarbonInput\Scripts\TouchInput\TouchStick.cs" />
+    <Compile Include="Assets\Scripts\Controllers\BlockSpawner.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\ControllerSignIn.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerAnimationDelegator.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Assets\Scripts\Joined Players\SquishDetector.cs" />
     <Compile Include="Assets\Scripts\Joined Players\TemporaryRotator.cs" />
     <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\Paint Blocks\PaintBlockCollision.cs" />
     <Compile Include="Assets\Scripts\Static\Materials.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
