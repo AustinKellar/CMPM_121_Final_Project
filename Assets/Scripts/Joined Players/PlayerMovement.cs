@@ -30,6 +30,10 @@ public class PlayerMovement : MonoBehaviour
         _grounded = GetComponent<PlayerGrounded>();
         _isSpawning = true;
         Physics.gravity = new Vector3(0, -_spawnFallSpeed, 0);
+    }
+
+    private void Start()
+    {
         HasMoved = false;
     }
 

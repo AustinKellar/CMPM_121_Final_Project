@@ -95,7 +95,10 @@
     <Compile Include="Assets\Scripts\Joined Players\TemporaryRotator.cs" />
     <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Paint Blocks\PaintBlockCollision.cs" />
+    <Compile Include="Assets\Scripts\Scene Blocks\SceneBlockCollision.cs" />
+    <Compile Include="Assets\Scripts\Static\ActivePlayers.cs" />
     <Compile Include="Assets\Scripts\Static\Materials.cs" />
+    <Compile Include="Assets\Scripts\TempTextController.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\CarbonInput\Demo\AutoMapper\readme.txt" />

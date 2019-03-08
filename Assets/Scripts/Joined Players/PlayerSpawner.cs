@@ -40,7 +40,7 @@ public class PlayerSpawner : MonoBehaviour
         }
     }
 
-    public void Spawn(PlayerIndex index)
+    public void Spawn(PlayerIndex index, bool addActivePlayer)
     {
         if (!_players.FirstOrDefault(p => p.Index == index))
         {
@@ -52,6 +52,11 @@ public class PlayerSpawner : MonoBehaviour
             _players.Add(player.GetComponent<PlayerInput>());
             AudioManager.Instance.PlayOneShot("Character Spawn");
 
+            if (addActivePlayer)
+            {
+                ActivePlayers.AddPlayer(new Player((int)index, player.GetComponentInChildren<SkinnedMeshRenderer>().material));
+            }
+
             if (_players.Count >= 2)
             {
                 Invoke("SpawnStartBlock", 0.5f);
@@ -59,7 +64,7 @@ public class PlayerSpawner : MonoBehaviour
         }
     }
 
-    public void Despawn(PlayerIndex index)
+    public void Despawn(PlayerIndex index, bool removeActivePlayer)
     {
         PlayerInput player = _players.FirstOrDefault(p => p.Index == index);
 
@@ -77,6 +82,11 @@ public class PlayerSpawner : MonoBehaviour
             if (removedPlayers > 0)
             {
                 AudioManager.Instance.PlayOneShot("Character Death");
+
+                if (removeActivePlayer)
+                {
+                    ActivePlayers.RemovePlayer(new Player((int)index, player.GetComponentInChildren<SkinnedMeshRenderer>().material));
+                }
             }
 
             if (_players.Count <= 1)
@@ -88,7 +98,7 @@ public class PlayerSpawner : MonoBehaviour
 
     public void Respawn(PlayerIndex index)
     {
-        Despawn(index);
+        Despawn(index, false);
 
         _playersToRespawn.Add(index);
         Invoke("SpawnSquishedPlayers", 1f);
@@ -108,8 +118,20 @@ public class PlayerSpawner : MonoBehaviour
     {
         foreach (PlayerIndex index in _playersToRespawn)
         {
-            Spawn(index);
+            Spawn(index, false);
         }
         _playersToRespawn.Clear();
+    }
+}
+
+public class Player
+{
+    public int PlayerNumber;
+    public Material Material;
+
+    public Player(int playerNumber, Material material)
+    {
+        PlayerNumber = playerNumber;
+        Material = material;
     }
 }

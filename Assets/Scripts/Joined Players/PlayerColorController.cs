@@ -38,6 +38,7 @@ public class PlayerColorController : MonoBehaviour
         PlayerInput input = player.GetComponent<PlayerInput>();
         player.GetComponentInChildren<SkinnedMeshRenderer>().material = material;
         _playerMaterials[input.Index] = material;
+        ActivePlayers.UpdateMaterial((int)player.GetComponent<PlayerInput>().Index, material);
     }
 
     public void FreeColorAtIndex(PlayerIndex index)

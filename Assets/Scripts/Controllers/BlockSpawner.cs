@@ -8,7 +8,10 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _blockPrefab;
+    private string _matchScene;
+
+    [SerializeField]
+    private GameObject _startBlockPrefab;
 
     [SerializeField]
     private GameObject _paintBlockPrefab;
@@ -46,10 +49,11 @@ public class BlockSpawner : MonoBehaviour
             return;
         }
 
-        _startBlock = Instantiate(_blockPrefab);
+        _startBlock = Instantiate(_startBlockPrefab);
         _startBlock.transform.parent = gameObject.transform;
-        _startBlock.transform.position = new Vector3(0, 20, -2);
+        _startBlock.transform.position = new Vector3(0, _paintBlockSpawnLocations.First().y, _paintBlockSpawnLocations.First().z);
         _startBlock.GetComponent<Rigidbody>().velocity = new Vector3(0, -80, 0);
+        _startBlock.GetComponent<SceneBlockCollision>().sceneToStart = _matchScene;
         AudioManager.Instance.PlayOneShot("Block Spawn Rock");
     }
 
@@ -74,8 +78,6 @@ public class BlockSpawner : MonoBehaviour
 
     public void DespawnPaintBlock(GameObject block, Material playerMaterial)
     {
-        Debug.Log(playerMaterial.name);
-
         Material particleMaterial = block.GetComponent<Renderer>().material;
         Transform blockTransform = block.transform;
         Destroy(block);
@@ -86,11 +88,10 @@ public class BlockSpawner : MonoBehaviour
         particleEmitter.GetComponent<Renderer>().material = particleMaterial;
         AudioManager.Instance.PlayOneShot("Block Break Rock");
 
-        Vector3 position = new Vector3(blockTransform.position.x, 12, blockTransform.position.z);
+        Vector3 position = new Vector3(blockTransform.position.x, _paintBlockSpawnLocations.First().y, blockTransform.position.z);
         _spawnStack.Push(position);
         Invoke("SpawnPaintBlockInDefaultPosition", 2f);
 
-        Debug.Log(playerMaterial.name);
         _materialsInUse.RemoveAll(m => m.color == playerMaterial.color);
     }
 
