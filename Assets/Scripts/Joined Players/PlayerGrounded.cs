@@ -14,8 +14,11 @@ public class PlayerGrounded : MonoBehaviour
 
     public bool IsGrounded { get; private set; }
 
+    public bool TouchingFloor { get; private set; }
+
     private void Update()
     {
         IsGrounded = Physics.Raycast(transform.position, Vector3.down, out _hit, _raycastDistance, _layerMask);
+        TouchingFloor = Physics.Raycast(transform.position, Vector3.down, out _hit, _raycastDistance, LayerMask.GetMask("Floor"));
     }
 }

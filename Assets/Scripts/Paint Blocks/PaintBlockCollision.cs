@@ -16,7 +16,7 @@ public class PaintBlockCollision : MonoBehaviour
     
     private void HandleCollision(GameObject player)
     {
-        if ((!player.GetComponent<PlayerMovement>().HasMoved) || player.GetComponent<PlayerDash>().IsDashing)
+        if (((!player.GetComponent<PlayerMovement>().HasMoved) && !player.GetComponent<PlayerGrounded>().TouchingFloor) || player.GetComponent<PlayerDash>().IsDashing)
         {
             Material playerMaterial = player.GetComponentInChildren<SkinnedMeshRenderer>().material;
             player.GetComponentInParent<PlayerColorController>().SetColor(player, gameObject.GetComponent<Renderer>().material);
