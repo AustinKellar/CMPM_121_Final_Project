@@ -10,9 +10,6 @@ public class ControllerSignIn : MonoBehaviour
 
     private PlayerIndex _index;
     private PlayerSpawner _playerSpawner;
-    private float _pressBTime;
-    private float _startDelay = 1f;
-    private float _startTime;
 
     public bool HasJoined { get; private set; }
 
@@ -20,16 +17,10 @@ public class ControllerSignIn : MonoBehaviour
     {
         HasJoined = false;
         _playerSpawner = FindObjectOfType<PlayerSpawner>();
-        _startTime = Time.time;
     }
 
     private void Update()
     {
-        if (Time.time < _startTime + _startDelay)
-        {
-            return;
-        }
-
         GamePadState state = GamePad.GetState(_index);
         if (state.Pressed(CButton.A))
         {
@@ -37,11 +28,28 @@ public class ControllerSignIn : MonoBehaviour
         }
         if (state.Pressed(CButton.B))
         {
-            _pressBTime = Time.time;
+            PlayerSelectUIManager.Instance.RemovePlayer(_index);
+            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                _playerSpawner.Despawn(_index, true);
+            }
         }
-        if (state.B && Time.time > _timeToHoldB + _pressBTime)
+        if (state.Back)
         {
-            _playerSpawner.Despawn(_index, true);
+            Application.Quit();
+        }
+        if (state.Pressed(CButton.Start))
+        {
+            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                PlayerSelectUIManager.Instance.StartMatch();
+            }
+
+            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)_index);
+            if (player != null)
+            {
+                PlayerSelectUIManager.Instance.ReadyPlayer(_index);
+            }
         }
 
         CaptureKeyboardInput();
@@ -77,10 +85,12 @@ public class ControllerSignIn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             _playerSpawner.Despawn(PlayerIndex.Three, true);
+            PlayerSelectUIManager.Instance.RemovePlayer(_index);
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             _playerSpawner.Despawn(PlayerIndex.Four, true);
+            PlayerSelectUIManager.Instance.RemovePlayer(_index);
         }
     }
 

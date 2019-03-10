@@ -4,9 +4,8 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_Name: Belching Brown
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION
@@ -74,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.5660378, g: 0.3024081, b: 0.16820933, a: 0.63529414}
-    - _EmissionColor: {r: 0.254717, g: 0.0371299, b: 0, a: 0}
+    - _Color: {r: 0.50735295, g: 0.27744567, b: 0.16041307, a: 0.63529414}
+    - _EmissionColor: {r: 0.1102941, g: 0.037553333, b: 0.025140565, a: 0}

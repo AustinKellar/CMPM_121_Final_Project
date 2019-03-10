@@ -7,6 +7,7 @@ public static class ActivePlayers
 {
     private static Dictionary<int, int> _playerScores = new Dictionary<int, int>();
     private static List<PlayerInfo> _activePlayers = new List<PlayerInfo>();
+    private static List<Material> _materialsInUse = new List<Material>();
 
     public static List<PlayerInfo> Players
     {
@@ -20,6 +21,7 @@ public static class ActivePlayers
     {
         _activePlayers = new List<PlayerInfo>();
         _playerScores = new Dictionary<int, int>();
+        _materialsInUse = new List<Material>();
     }
 
     public static void AddPlayer(Player player)
@@ -39,15 +41,17 @@ public static class ActivePlayers
 
     public static void InitializeAllPlayers()
     {
-        if( _playerScores.Count > 0)
+        if (_playerScores.Count > 0)
         {
             return;
         }
 
-        for(int i=1; i<=4; i++)
+        for (int i = 1; i <= 4; i++)
         {
             _playerScores.Add(i, 0);
-            _activePlayers.Add(new PlayerInfo(i));
+            Material material = Materials.Instance.availableMaterials.First(m => !_materialsInUse.Contains(m));
+            _materialsInUse.Add(material);
+            _activePlayers.Add(new PlayerInfo(i, material));
         }
     }
 
@@ -89,8 +93,9 @@ public class PlayerInfo
         Material = player.Material;
     }
 
-    public PlayerInfo(int controllerNumber)
+    public PlayerInfo(int controllerNumber, Material material)
     {
         ControllerNumber = controllerNumber;
+        Material = material;
     }
 }
