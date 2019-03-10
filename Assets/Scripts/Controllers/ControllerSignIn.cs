@@ -76,21 +76,87 @@ public class ControllerSignIn : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            _playerSpawner.Despawn(PlayerIndex.One, true);
+            PlayerSelectUIManager.Instance.RemovePlayer(PlayerIndex.One);
+            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                _playerSpawner.Despawn(PlayerIndex.One, true);
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            _playerSpawner.Despawn(PlayerIndex.Two, true);
+            PlayerSelectUIManager.Instance.RemovePlayer(PlayerIndex.Two);
+            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                _playerSpawner.Despawn(PlayerIndex.Two, true);
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            _playerSpawner.Despawn(PlayerIndex.Three, true);
-            PlayerSelectUIManager.Instance.RemovePlayer(_index);
+            PlayerSelectUIManager.Instance.RemovePlayer(PlayerIndex.Three);
+            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                _playerSpawner.Despawn(PlayerIndex.Three, true);
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            _playerSpawner.Despawn(PlayerIndex.Four, true);
-            PlayerSelectUIManager.Instance.RemovePlayer(_index);
+            PlayerSelectUIManager.Instance.RemovePlayer(PlayerIndex.Four);
+            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                _playerSpawner.Despawn(PlayerIndex.Four, true);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                PlayerSelectUIManager.Instance.StartMatch();
+            }
+
+            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)PlayerIndex.One);
+            if (player != null)
+            {
+                PlayerSelectUIManager.Instance.ReadyPlayer(PlayerIndex.One);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                PlayerSelectUIManager.Instance.StartMatch();
+            }
+
+            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)PlayerIndex.Two);
+            if (player != null)
+            {
+                PlayerSelectUIManager.Instance.ReadyPlayer(PlayerIndex.Two);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                PlayerSelectUIManager.Instance.StartMatch();
+            }
+
+            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)PlayerIndex.Three);
+            if (player != null)
+            {
+                PlayerSelectUIManager.Instance.ReadyPlayer(PlayerIndex.Three);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
+            {
+                PlayerSelectUIManager.Instance.StartMatch();
+            }
+
+            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)PlayerIndex.Four);
+            if (player != null)
+            {
+                PlayerSelectUIManager.Instance.ReadyPlayer(PlayerIndex.Four);
+            }
         }
     }
 
