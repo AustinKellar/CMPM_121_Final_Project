@@ -4,6 +4,8 @@ A - Join / Jump
 Hold B - Leave
 Left Stick - Move
 X - Dash
+Start - Ready Up
+Back - Close Application (only works in build)
 
 Keyboard:
 1 - Spawn Player 1
@@ -15,6 +17,12 @@ Keyboard:
 6 - Despawn Player2
 7 - Despawn Player 3
 8 - Despawn Player 4
+
+E - Ready Up Player 1 / Start Match
+R - Ready Up Player 2 / Start Match
+T - Ready Up Player 3 / Start Match
+Y - Ready Up Player 4 / Start Match
+
 
 AD - Move Player One
 Space - Jump Player One
