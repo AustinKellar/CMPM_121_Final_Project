@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/austi/OneDrive/Desktop/cm121/CMPM_121_Final_Project.exe
+C:/Users/austi/OneDrive/Documents/cm121video/CMPM_121_Final_Project.exe
 SceneListBegin?
 Assets/Scenes/Player Select Lobby.unity
 Assets/Scenes/Match Scene.unity
@@ -142,7 +142,10 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 a44ba43935880aad58e5a651e988fb34 Assembly-CSharp.dll:CarbonInput.DisableTouchInput
+704dcd31abc789439bc3f3cd10b58c2b DOTween.dll:DG.Tweening.Core.DOTweenComponent
+49cbb3369dc9b7b81a56e2f87e67a737 DOTween.dll:DG.Tweening.Core.DOTweenSettings
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
+e29384caabb9df821a4df7da1e631754 Assembly-CSharp.dll:.PlayerSelectUIManager
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 1dcb82730d983b77cec736c6ef19f814 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -191,6 +194,3 @@ c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 36762faa23210971c1e9385e7aaa8f29 Assembly-CSharp.dll:.TempTextController
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-e29384caabb9df821a4df7da1e631754 Assembly-CSharp.dll:.PlayerSelectUIManager
-704dcd31abc789439bc3f3cd10b58c2b DOTween.dll:DG.Tweening.Core.DOTweenComponent
-49cbb3369dc9b7b81a56e2f87e67a737 DOTween.dll:DG.Tweening.Core.DOTweenSettings

@@ -20,11 +20,6 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        if (Index == PlayerIndex.Three || Index == PlayerIndex.Four)
-        {
-            return;
-        }
-
         if (_movementLocked)
         {
             if (!_grounded.IsGrounded)
@@ -70,7 +65,7 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        if (HorizontalMovement != 1 && HorizontalMovement != -1)
+        if (Index == PlayerIndex.Three || Index == PlayerIndex.Four || HorizontalMovement != 1 && HorizontalMovement != -1)
         {
             HorizontalMovement = state.GetAxis(CAxis.LX);
         }
