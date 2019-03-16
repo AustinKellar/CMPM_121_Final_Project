@@ -27,6 +27,7 @@ public class PlayerSelectBlockSpawner : MonoBehaviour
     private List<Vector3> _blocksToRespawn;
     private int _spawnCount;
     private float _paintBlockLastDestroyedTime;
+    private bool _spawnedStartingBlocks = false;
 
     private void Awake()
     {
@@ -37,12 +38,31 @@ public class PlayerSelectBlockSpawner : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < _paintBlockSpawnLocations.Count; i++)
-        {
-            Invoke("SpawnPaintBlockFromStack", Convert.ToSingle(i) / 10f);
-        }
-
+        StartCoroutine(SpawnStartingBlocks());
         StartCoroutine(RespawnPaintBlocks());
+    }
+
+    public void Reset()
+    {
+        List<GameObject> blocks = GetComponentsInChildren<PaintBlockCollision>().Select(o => o.gameObject).ToList();
+        blocks.ForEach(b => DestroyPaintBlock(b));
+        _spawnedStartingBlocks = false;
+        _blocksToRespawn = new List<Vector3>(_paintBlockSpawnLocations.OrderBy(v => v.x));
+        _spawnCount = 0;
+    }
+
+    public void DestroyPaintBlock(GameObject block)
+    {
+        Material particleMaterial = block.GetComponent<Renderer>().material;
+        Transform blockTransform = block.transform;
+
+        Destroy(block);
+
+        ParticleSystem particleEmitter = Instantiate(_despawnParticleEffect, blockTransform.position, Quaternion.identity);
+        particleEmitter.transform.parent = gameObject.transform;
+        particleEmitter.GetComponent<Renderer>().material = particleMaterial;
+        AudioManager.Instance.PlayOneShot("Block Break Rock");
+        _colorController.ReturnMaterialToPool(particleMaterial);
     }
 
     public void DespawnPaintBlock(GameObject block, Material playerMaterial)
@@ -82,11 +102,31 @@ public class PlayerSelectBlockSpawner : MonoBehaviour
         SpawnPaintBlock(position, _colorController.GetRandomAvailableMaterial());
     }
 
+    private IEnumerator SpawnStartingBlocks()
+    {
+        while(true)
+        {
+            if (!_spawnedStartingBlocks)
+            {
+                if (LobbyStateManager.Instance.State == LobbyStateManager.LobbyState.ColorSelect)
+                {
+                    for (int i = 0; i < _paintBlockSpawnLocations.Count; i++)
+                    {
+                        Invoke("SpawnPaintBlockFromStack", Convert.ToSingle(i) / 10f);
+                    }
+                    _spawnedStartingBlocks = true;
+                }
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
     private IEnumerator RespawnPaintBlocks()
     {
         while (true)
         {
-            if (_blocksToRespawn.Count > 0 &&
+            if (_blocksToRespawn.Count > 0 && 
+                LobbyStateManager.Instance.State == LobbyStateManager.LobbyState.ColorSelect &&
                 !PlayerSelectUIManager.Instance.ReadyToStartMatch &&
                 _colorController.TrackedMaterialCount < Materials.Instance.availableMaterials.Length &&
                 _spawnCount >= 4 &&

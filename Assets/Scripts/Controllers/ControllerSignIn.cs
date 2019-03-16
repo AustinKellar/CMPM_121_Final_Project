@@ -10,6 +10,7 @@ public class ControllerSignIn : MonoBehaviour
 
     private PlayerIndex _index;
     private PlayerSpawner _playerSpawner;
+    private PlayerSelectBlockSpawner _blockSpawner;
     private float _pressedBTime;
 
     public bool HasJoined { get; private set; }
@@ -18,10 +19,16 @@ public class ControllerSignIn : MonoBehaviour
     {
         HasJoined = false;
         _playerSpawner = FindObjectOfType<PlayerSpawner>();
+        _blockSpawner = FindObjectOfType<PlayerSelectBlockSpawner>();
     }
 
     private void Update()
     {
+        if (LobbyStateManager.Instance.State == LobbyStateManager.LobbyState.TitleScreen)
+        {
+            return;
+        }
+
         GamePadState state = GamePad.GetState(_index);
         if (state.Pressed(CButton.A))
         {
@@ -41,7 +48,10 @@ public class ControllerSignIn : MonoBehaviour
         }
         if (state.Back)
         {
-            Application.Quit();
+            _blockSpawner.Reset();
+            _playerSpawner.Reset();
+            PlayerSelectUIManager.Instance.Reset();
+            LobbyStateManager.Instance.ReturnToTitleScreen();
         }
         if (state.Pressed(CButton.Start))
         {

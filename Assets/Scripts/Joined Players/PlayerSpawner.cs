@@ -15,7 +15,6 @@ public class PlayerSpawner : MonoBehaviour
     List<Vector3> _spawnLocations;
 
     private PlayerSelectColorController _colorController;
-    private GameObject _startBlock = null;
     private List<PlayerIndex> _playersToRespawn = new List<PlayerIndex>();
     private List<PlayerInput> _players = new List<PlayerInput>();
 
@@ -37,6 +36,27 @@ public class PlayerSpawner : MonoBehaviour
             AudioManager.Instance.FadeInSound("Menu Theme", 1f);
         }
         ActivePlayers.Reset();
+    }
+
+    public void Reset()
+    {
+        List<GameObject> players = GetComponentsInChildren<PlayerInput>().Select(p => p.gameObject).ToList();
+        players.ForEach(p => DestroyPlayer(p));
+        ActivePlayers.Reset();
+        _players.Clear();
+        _playersToRespawn.Clear();
+    }
+
+    public void DestroyPlayer(GameObject player)
+    {
+        Destroy(player.gameObject);
+
+        ParticleSystem particleEmitter = Instantiate(_despawnParticleEffect, player.transform.position, Quaternion.identity);
+        particleEmitter.transform.parent = gameObject.transform;
+
+        Material material = player.GetComponentInChildren<SkinnedMeshRenderer>().material;
+        particleEmitter.GetComponent<Renderer>().material = material;
+        _colorController.ReturnMaterialToPool(material);
     }
 
     public void Spawn(PlayerIndex index, bool addActivePlayer)

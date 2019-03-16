@@ -63,6 +63,16 @@ public class PlayerSelectUIManager : MonoBehaviour
         SceneManager.LoadScene(_matchScene);
     }
 
+    public void Reset()
+    {
+        foreach (Image icon in GetIcons(true))
+        {
+            icon.gameObject.SetActive(false);
+        }
+        _playerIconsPanel.SetActive(false);
+        _controls.SetActive(true);
+    }
+
     public void ReadyPlayer(PlayerIndex index)
     {
         PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)index);
@@ -123,21 +133,30 @@ public class PlayerSelectUIManager : MonoBehaviour
         bool previouslyDisabled = true;
         while (true)
         {
-            if (ReadyForStartMatchUI())
+            if (LobbyStateManager.Instance.State == LobbyStateManager.LobbyState.ColorSelect)
             {
-                UpdateStartMatchIcons();
-                _startMatch.SetActive(true);
-                _lobbyUI.SetActive(false);
-                if (previouslyDisabled)
+                if (ReadyForStartMatchUI())
                 {
-                    ShakeStartMatch();
+                    UpdateStartMatchIcons();
+                    _startMatch.SetActive(true);
+                    _lobbyUI.SetActive(false);
+                    if (previouslyDisabled)
+                    {
+                        ShakeStartMatch();
+                    }
+                    previouslyDisabled = false;
                 }
-                previouslyDisabled = false;
+                else
+                {
+                    _startMatch.SetActive(false);
+                    _lobbyUI.SetActive(true);
+                    previouslyDisabled = true;
+                }
             }
             else
             {
+                _lobbyUI.SetActive(false);
                 _startMatch.SetActive(false);
-                _lobbyUI.SetActive(true);
                 previouslyDisabled = true;
             }
             yield return new WaitForSeconds(0.5f);
