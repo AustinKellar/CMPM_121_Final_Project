@@ -20,29 +20,33 @@ public class PlayerSelectUIManager : MonoBehaviour
     private GameObject _controls;
 
     [SerializeField]
-    private GameObject _playerIcons;
+    private GameObject _playerIconsPanel;
+
+    [SerializeField]
+    private GameObject _playerIconContainer;
 
     [SerializeField]
     private GameObject _startMatch;
 
     [SerializeField]
-    private float _clearShakeTimer = 0.5f;
-
-    [SerializeField]
     private GameObject _startMatchIcons;
 
     [SerializeField]
-    private float _clearShakeMagnitude = 0.3f;
+    private float _playerJoinTween;
 
     private Tweener _tweener;
     private Tweener _startMatchTweener;
-    private int _readyCount = 0;
 
-    public bool ReadyToStartMatch { get { return _startMatch.active; } }
+    public bool ReadyToStartMatch { get { return _startMatch.activeSelf; } }
 
     private void Awake()
     {
         KeepOnlyOneInstance();
+        foreach (Image icon in GetIcons(true))
+        {
+            icon.gameObject.SetActive(false);
+        }
+        _playerIconsPanel.SetActive(false);
     }
 
     private void Start()
@@ -70,7 +74,7 @@ public class PlayerSelectUIManager : MonoBehaviour
         Material material = player.Material;
 
         _controls.SetActive(false);
-        _playerIcons.SetActive(true);
+        _playerIconsPanel.SetActive(true);
         DisplayPlayer(index);
         SetColor(index, material);
     }
@@ -84,7 +88,7 @@ public class PlayerSelectUIManager : MonoBehaviour
 
         if (GetIcons(false).Length == 0)
         {
-            _playerIcons.SetActive(false);
+            _playerIconsPanel.SetActive(false);
             _controls.SetActive(true);
         }
     }
@@ -111,7 +115,7 @@ public class PlayerSelectUIManager : MonoBehaviour
         image.color = newColor;
 
         _tweener.Complete();
-        _tweener = image.transform.DOPunchScale(Vector3.one * .5f, 0.3f);
+        _tweener = image.transform.DOPunchScale(Vector3.one * _playerJoinTween, 0.3f, 9, 1);
     }
 
     private IEnumerator DisplayStartMatch()
@@ -119,7 +123,7 @@ public class PlayerSelectUIManager : MonoBehaviour
         bool previouslyDisabled = true;
         while (true)
         {
-            if (GetIcons(false).Length == ActivePlayers.Players.Count && ActivePlayers.Players.Count >= 2)
+            if (ReadyForStartMatchUI())
             {
                 UpdateStartMatchIcons();
                 _startMatch.SetActive(true);
@@ -159,14 +163,38 @@ public class PlayerSelectUIManager : MonoBehaviour
         _startMatchTweener = _startMatch.transform.DOPunchScale(Vector3.one * 1.1f, 0.2f);
     }
 
+    private bool ReadyForStartMatchUI()
+    {
+        if (GetIcons(false).Length < 2)
+        {
+            return false;
+        }
+
+        foreach (PlayerInfo player in ActivePlayers.Players)
+        {
+            if (!ExistsMatchingReadyPlayer(player))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool ExistsMatchingReadyPlayer(PlayerInfo player)
+    {
+        Image[] icons = GetIcons(true);
+        return icons[player.ControllerNumber - 1].gameObject.activeSelf;
+    }
+
     private Image[] GetIcons(bool getInactiveIcons)
     {
-        return _playerIcons.GetComponentsInChildren<Image>(getInactiveIcons).OrderBy(i => i.gameObject.name).ToArray();
+        return _playerIconContainer.GetComponentsInChildren<Image>(getInactiveIcons).OrderBy(i => i.gameObject.name).ToArray();
     }
 
     private void UpdateStartMatchIcons()
     {
-        if (!_lobbyUI.active)
+        if (!_lobbyUI.activeSelf)
         {
             return;
         }
@@ -176,7 +204,7 @@ public class PlayerSelectUIManager : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            newIcons[i].gameObject.SetActive(selectedPlayers[i].gameObject.active);
+            newIcons[i].gameObject.SetActive(selectedPlayers[i].IsActive());
             newIcons[i].color = selectedPlayers[i].color;
         }
     }

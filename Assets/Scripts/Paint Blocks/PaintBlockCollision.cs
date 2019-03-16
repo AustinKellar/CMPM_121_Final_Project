@@ -30,8 +30,8 @@ public class PaintBlockCollision : MonoBehaviour
         {
             _alreadyCollided = true;
             Material playerMaterial = player.GetComponentInChildren<SkinnedMeshRenderer>().material;
-            player.GetComponentInParent<PlayerColorChanger>().SetColor(player, gameObject.GetComponent<Renderer>().material);
             gameObject.GetComponentInParent<PlayerSelectBlockSpawner>().DespawnPaintBlock(gameObject, playerMaterial);
+            player.GetComponentInParent<PlayerSelectColorController>().SetPlayerColor(player, gameObject.GetComponent<Renderer>().material);
         }
     }
 }

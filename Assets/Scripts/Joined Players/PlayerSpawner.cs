@@ -14,18 +14,16 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField]
     List<Vector3> _spawnLocations;
 
-    private PlayerColorChanger _colorController;
-    private PlayerSelectBlockSpawner _blockSpawner;
+    private PlayerSelectColorController _colorController;
     private GameObject _startBlock = null;
     private List<PlayerIndex> _playersToRespawn = new List<PlayerIndex>();
-
     private List<PlayerInput> _players = new List<PlayerInput>();
+
+    public int DeadPlayerCount { get { return _playersToRespawn.Count; } }
 
     private void Awake()
     {
-        _colorController = GetComponent<PlayerColorChanger>();
-        _blockSpawner = GetComponent<PlayerSelectBlockSpawner>();
-
+        _colorController = GetComponent<PlayerSelectColorController>();
         if (_spawnLocations.Count < _players.Count)
         {
             throw new System.Exception("There are not enough player spawn locations specified.");
@@ -50,17 +48,14 @@ public class PlayerSpawner : MonoBehaviour
             player.GetComponent<PlayerInput>().Index = index;
             player.transform.parent = gameObject.transform;
 
-            Material material = _colorController.AssignRandomMaterial(index, position);
-            player.GetComponentInChildren<SkinnedMeshRenderer>().material = material;
+            Material material = _colorController.AssignRandomPlayerMaterial(player);
             _players.Add(player.GetComponent<PlayerInput>());
-            AudioManager.Instance.PlayOneShot("Character Spawn");
+            AudioManager.Instance.PlayOneShot("Player Jump");
 
             if (addActivePlayer)
             {
                 ActivePlayers.AddPlayer(new Player((int)index, material));
             }
-            ActivePlayers.UpdateMaterial((int)index, material);
-            PlayerSelectUIManager.Instance.UpdateColor(index, material);
         }
     }
 
@@ -79,12 +74,11 @@ public class PlayerSpawner : MonoBehaviour
             Material material = player.GetComponentInChildren<SkinnedMeshRenderer>().material;
             particleEmitter.GetComponent<Renderer>().material = material;
             int removedPlayers = _players.RemoveAll(p => p.Index == index);
+            _colorController.ReturnMaterialToPool(material);
 
             if (removedPlayers > 0)
             {
                 AudioManager.Instance.PlayOneShot("Character Death");
-                _blockSpawner.ReturnMaterialToPool(material);
-
                 if (removeActivePlayer)
                 {
                     ActivePlayers.RemovePlayer(new Player((int)index, material));

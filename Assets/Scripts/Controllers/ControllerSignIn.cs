@@ -10,6 +10,7 @@ public class ControllerSignIn : MonoBehaviour
 
     private PlayerIndex _index;
     private PlayerSpawner _playerSpawner;
+    private float _pressedBTime;
 
     public bool HasJoined { get; private set; }
 
@@ -28,7 +29,11 @@ public class ControllerSignIn : MonoBehaviour
         }
         if (state.Pressed(CButton.B))
         {
+            _pressedBTime = Time.time;
             PlayerSelectUIManager.Instance.RemovePlayer(_index);
+        }
+        if (state.B && Time.time > _pressedBTime + _timeToHoldB)
+        {
             if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
             {
                 _playerSpawner.Despawn(_index, true);
@@ -76,87 +81,21 @@ public class ControllerSignIn : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            PlayerSelectUIManager.Instance.RemovePlayer(PlayerIndex.One);
-            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
-            {
-                _playerSpawner.Despawn(PlayerIndex.One, true);
-            }
+            _playerSpawner.Despawn(PlayerIndex.One, true);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            PlayerSelectUIManager.Instance.RemovePlayer(PlayerIndex.Two);
-            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
-            {
-                _playerSpawner.Despawn(PlayerIndex.Two, true);
-            }
+            _playerSpawner.Despawn(PlayerIndex.Two, true);
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            PlayerSelectUIManager.Instance.RemovePlayer(PlayerIndex.Three);
-            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
-            {
-                _playerSpawner.Despawn(PlayerIndex.Three, true);
-            }
+            _playerSpawner.Despawn(PlayerIndex.Three, true);
+            PlayerSelectUIManager.Instance.RemovePlayer(_index);
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            PlayerSelectUIManager.Instance.RemovePlayer(PlayerIndex.Four);
-            if (!PlayerSelectUIManager.Instance.ReadyToStartMatch)
-            {
-                _playerSpawner.Despawn(PlayerIndex.Four, true);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
-            {
-                PlayerSelectUIManager.Instance.StartMatch();
-            }
-
-            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)PlayerIndex.One);
-            if (player != null)
-            {
-                PlayerSelectUIManager.Instance.ReadyPlayer(PlayerIndex.One);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
-            {
-                PlayerSelectUIManager.Instance.StartMatch();
-            }
-
-            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)PlayerIndex.Two);
-            if (player != null)
-            {
-                PlayerSelectUIManager.Instance.ReadyPlayer(PlayerIndex.Two);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
-            {
-                PlayerSelectUIManager.Instance.StartMatch();
-            }
-
-            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)PlayerIndex.Three);
-            if (player != null)
-            {
-                PlayerSelectUIManager.Instance.ReadyPlayer(PlayerIndex.Three);
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            if (PlayerSelectUIManager.Instance.ReadyToStartMatch)
-            {
-                PlayerSelectUIManager.Instance.StartMatch();
-            }
-
-            PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)PlayerIndex.Four);
-            if (player != null)
-            {
-                PlayerSelectUIManager.Instance.ReadyPlayer(PlayerIndex.Four);
-            }
+            _playerSpawner.Despawn(PlayerIndex.Four, true);
+            PlayerSelectUIManager.Instance.RemovePlayer(_index);
         }
     }
 

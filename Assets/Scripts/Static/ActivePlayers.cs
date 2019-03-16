@@ -26,7 +26,11 @@ public static class ActivePlayers
 
     public static void AddPlayer(Player player)
     {
-        _activePlayers.Add(new PlayerInfo(player));
+        PlayerInfo existingPlayer = _activePlayers.FirstOrDefault(p => p.ControllerNumber == player.PlayerNumber);
+        if (existingPlayer == default(PlayerInfo))
+        {
+            _activePlayers.Add(new PlayerInfo(player));
+        }
         if (_playerScores.FirstOrDefault(p => p.Key == player.PlayerNumber).Equals(default(KeyValuePair<int, int>)))
         {
             _playerScores.Add(player.PlayerNumber, 0);

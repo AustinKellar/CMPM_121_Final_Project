@@ -92,12 +92,12 @@
     <Compile Include="Assets\Scripts\Controllers\ControllerSignIn.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerSelectBlockSpawner.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerAnimationDelegator.cs" />
-    <Compile Include="Assets\Scripts\Joined Players\PlayerColorChanger.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerDash.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerGrounded.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerJump.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Joined Players\PlayerSelectColorController.cs" />
     <Compile Include="Assets\Scripts\Joined Players\PlayerSpawner.cs" />
     <Compile Include="Assets\Scripts\Joined Players\SquishDetector.cs" />
     <Compile Include="Assets\Scripts\Joined Players\TemporaryRotator.cs" />
