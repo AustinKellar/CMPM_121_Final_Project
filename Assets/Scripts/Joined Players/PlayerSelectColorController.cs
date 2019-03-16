@@ -48,8 +48,6 @@ public class PlayerSelectColorController : MonoBehaviour
     {
         PlayerInput input = player.GetComponent<PlayerInput>();
         player.GetComponentInChildren<SkinnedMeshRenderer>().material = material;
-        player.GetComponent<TrailRenderer>().material = material;
-        player.GetComponentInChildren<Light>().color = material.color;
         ActivePlayers.UpdateMaterial((int)player.GetComponent<PlayerInput>().Index, material);
         PlayerSelectUIManager.Instance.UpdateColor(input.Index, material);
         _playerMaterials[input.Index] = material;
