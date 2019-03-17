@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/austi/OneDrive/Documents/cm121video/CMPM_121_Final_Project.exe
+C:/Users/austi/OneDrive/Documents/cm121 final build/CMPM_121_Final_Project.exe
 SceneListBegin?
 Assets/Scenes/Player Select Lobby.unity
 Assets/Scenes/Match Scene.unity
@@ -94,7 +94,6 @@ fc108ce7d98c40ac0907e8ca7f500c76 UnityEngine.UI.dll:UnityEngine.UI.Text
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 26fe8d64d18a6adb64611d959c11fe05 Assembly-CSharp.dll:CarbonInput.Demo.FollowBall
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.PlayerColorChanger
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:CarbonInput.ReInit
 f5bd84ae8adbb29b7b011cc5b065052b Assembly-CSharp.dll:.PlayerSelectBlockSpawner
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -130,12 +129,14 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
+baa43300414c4065c5c36a4d2bbc362b Assembly-CSharp.dll:.LobbyStateManager
 8a880b1779ca3b9eaaaf06fff8cc5e78 Assembly-CSharp.dll:CarbonInput.CarbonSettings
 3997a2934a31421c034c4fb34daabc27 Assembly-CSharp.dll:CarbonInput.Demo.AutoMapper
 0fa9bbf20ca9738f48dba26a4da9918e Assembly-CSharp.dll:CarbonInput.TouchButton
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:CarbonInput.Demo.Demo
 94017dcc9f00fe671ea7dc427b4da011 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 ff0669b96a7a2dbab4c77c533d203133 Assembly-CSharp.dll:CarbonInput.Demo.Drop
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.PlayerSelectColorController
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 69d0141ed97072dc021de4ad59badb98 Assembly-CSharp.dll:CarbonInput.Demo.BallController
 466d5a6f8ddecb7335987c97829b5be3 Assembly-CSharp.dll:.PlayerAnimationDelegator
@@ -145,7 +146,7 @@ a44ba43935880aad58e5a651e988fb34 Assembly-CSharp.dll:CarbonInput.DisableTouchInp
 704dcd31abc789439bc3f3cd10b58c2b DOTween.dll:DG.Tweening.Core.DOTweenComponent
 49cbb3369dc9b7b81a56e2f87e67a737 DOTween.dll:DG.Tweening.Core.DOTweenSettings
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-e29384caabb9df821a4df7da1e631754 Assembly-CSharp.dll:.PlayerSelectUIManager
+df7d494f89f671be3b5d682406325f58 Assembly-CSharp.dll:.PlayerSelectUIManager
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 1dcb82730d983b77cec736c6ef19f814 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -187,10 +188,12 @@ a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 53c3099d61e748140e0be56563bea1ab Assembly-CSharp.dll:.PlayerDash
 23fd4dc82e40652c696e0e271ee455aa Assembly-CSharp.dll:.ControllerSignIn
+e80c78ffbc33f6c0bbc94284e6602a4c Assembly-CSharp.dll:.UITitleMenu
 73fdd6428bea303b5a751b85516f5d34 Assembly-CSharp.dll:.Materials
 07c76131298427ba48cba994986e3476 Assembly-CSharp.dll:CarbonInput.BaseTouchInput
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LobbyMenuInput
 36762faa23210971c1e9385e7aaa8f29 Assembly-CSharp.dll:.TempTextController
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
