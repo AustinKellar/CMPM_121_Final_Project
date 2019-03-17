@@ -29,7 +29,7 @@ public class PlayerJump : MonoBehaviour
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             _animation.SetTrigger("Jumping");
-            AudioManager.Instance.PlayOneShot("Character Jump");
+            AudioManager.Instance.PlayOneShot("Player Jump");
         }
     }
 }
