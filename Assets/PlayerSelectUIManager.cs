@@ -73,6 +73,11 @@ public class PlayerSelectUIManager : MonoBehaviour
         _controls.SetActive(true);
     }
 
+    public bool PlayerIsReady(PlayerIndex player)
+    {
+        return GetIcons(true)[(int)player - 1].IsActive();
+    }
+
     public void ReadyPlayer(PlayerIndex index)
     {
         PlayerInfo player = ActivePlayers.Players.FirstOrDefault(p => p.ControllerNumber == (int)index);

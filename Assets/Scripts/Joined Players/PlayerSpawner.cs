@@ -61,6 +61,11 @@ public class PlayerSpawner : MonoBehaviour
 
     public void Spawn(PlayerIndex index, bool addActivePlayer)
     {
+        if (LobbyStateManager.Instance.State == LobbyStateManager.LobbyState.TitleScreen || !LobbyStateManager.Instance.CameraAtDestination)
+        {
+            return;
+        }
+
         if (!_players.FirstOrDefault(p => p.Index == index))
         {
             Vector3 position = _spawnLocations[(int)index - 1];
@@ -71,6 +76,15 @@ public class PlayerSpawner : MonoBehaviour
             Material material = _colorController.AssignRandomPlayerMaterial(player);
             _players.Add(player.GetComponent<PlayerInput>());
             AudioManager.Instance.PlayOneShot("Player Jump");
+
+            if (PlayerSelectUIManager.Instance.PlayerIsReady(index))
+            {
+                _colorController.ShowIcon(index);
+            }
+            else
+            {
+                _colorController.HideIcon(index);
+            }
 
             if (addActivePlayer)
             {

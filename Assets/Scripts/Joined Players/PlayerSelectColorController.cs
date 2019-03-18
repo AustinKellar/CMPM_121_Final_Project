@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerSelectColorController : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class PlayerSelectColorController : MonoBehaviour
         { PlayerIndex.Three, null },
         { PlayerIndex.Four, null }
     };
+
+    private Tweener _iconTweener;
 
     public int TrackedMaterialCount { get { return _materialsInUse.Count; } }
 
@@ -79,5 +83,26 @@ public class PlayerSelectColorController : MonoBehaviour
         _materialsInUse.Add(material);
 
         return material;
+    }
+
+    public void ShowIcon(PlayerIndex index)
+    {
+        PlayerInput player = GetComponentsInChildren<PlayerInput>().FirstOrDefault(p => p.Index == index);
+        if (player != null)
+        {
+            Image icon = player.gameObject.GetComponentInChildren<Image>(true);
+            icon.gameObject.SetActive(true);
+            _iconTweener.Complete();
+            _iconTweener = icon.transform.DOPunchScale(icon.transform.localScale * 1.05f, 0.3f, 9);
+        }
+    }
+
+    public void HideIcon(PlayerIndex index)
+    {
+        PlayerInput player = GetComponentsInChildren<PlayerInput>().FirstOrDefault(p => p.Index == index);
+        if (player)
+        {
+            player.gameObject.GetComponentInChildren<Image>(true).gameObject.SetActive(false);
+        }
     }
 }

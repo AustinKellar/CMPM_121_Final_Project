@@ -19,10 +19,21 @@ public class LobbyStateManager : MonoBehaviour
     [SerializeField]
     private Vector3 _colorSelectCameraRotation;
 
+    [SerializeField]
+    private float _distanceThreshold = 0.5f;
+
     private Vector3 _startingPosition;
     private Vector3 _startingRotation;
     private Vector3 _destination;
     private Vector3 _destinationRotation;
+
+    public bool CameraAtDestination
+    {
+        get
+        {
+            return Vector3.Distance(_camera.transform.position, _destination) < _distanceThreshold;
+        }
+    }
 
     private void Awake()
     {
@@ -55,7 +66,7 @@ public class LobbyStateManager : MonoBehaviour
     {
         _destination = _colorSelectCameraPosition;
         _destinationRotation = _colorSelectCameraRotation;
-        Invoke("SetStateToColorSelect", 0.25f);
+        Invoke("SetStateToColorSelect", 0.5f);
     }
 
     public void Quit()

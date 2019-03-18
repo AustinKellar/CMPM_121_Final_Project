@@ -17,7 +17,7 @@ public class LobbyMenuInput : MonoBehaviour
 
     private void Update()
     {
-        if (LobbyStateManager.Instance.State == LobbyStateManager.LobbyState.ColorSelect)
+        if (LobbyStateManager.Instance.State == LobbyStateManager.LobbyState.ColorSelect || !LobbyStateManager.Instance.CameraAtDestination)
         {
             CloseMenuPressed = UpButtonPressed = DownButtonPressed = ExecuteButtonPressed = false;
             return;

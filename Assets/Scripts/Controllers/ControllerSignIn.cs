@@ -11,6 +11,7 @@ public class ControllerSignIn : MonoBehaviour
     private PlayerIndex _index;
     private PlayerSpawner _playerSpawner;
     private PlayerSelectBlockSpawner _blockSpawner;
+    private PlayerSelectColorController _colorController;
     private float _pressedBTime;
 
     public bool HasJoined { get; private set; }
@@ -20,6 +21,7 @@ public class ControllerSignIn : MonoBehaviour
         HasJoined = false;
         _playerSpawner = FindObjectOfType<PlayerSpawner>();
         _blockSpawner = FindObjectOfType<PlayerSelectBlockSpawner>();
+        _colorController = FindObjectOfType<PlayerSelectColorController>();
     }
 
     private void Update()
@@ -38,6 +40,7 @@ public class ControllerSignIn : MonoBehaviour
         {
             _pressedBTime = Time.time;
             PlayerSelectUIManager.Instance.RemovePlayer(_index);
+            _colorController.HideIcon(_index);
         }
         if (state.B && Time.time > _pressedBTime + _timeToHoldB)
         {
@@ -64,6 +67,7 @@ public class ControllerSignIn : MonoBehaviour
             if (player != null)
             {
                 PlayerSelectUIManager.Instance.ReadyPlayer(_index);
+                _colorController.ShowIcon(_index);
             }
         }
 
