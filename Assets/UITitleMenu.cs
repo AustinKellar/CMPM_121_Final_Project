@@ -70,7 +70,7 @@ public class UITitleMenu : MonoBehaviour
             a.button.transform.localScale = _startingScale;
         });
         _selectedAction.button.GetComponent<Image>().color = _hoverColor;
-        _selectedAction.button.transform.localScale *= 1.04f;
+        _selectedAction.button.transform.localScale *= 1.08f;
     }
 
     private class MenuAction
